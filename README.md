@@ -12,15 +12,17 @@ Aplikasi desktop sederhana berbasis **Python + PyQt5 + SQLite** untuk melakukan 
 ---
 
 ## 🎯 Fitur Utama
-
-✅ Input data buku (judul, pengarang, tahun)  
-✅ Tabel dinamis menggunakan `QTableWidget`  
-✅ Real-time search berdasarkan **judul**  
-✅ Edit data via **double click**  
-✅ Hapus data dari menu  
-✅ Ekspor data ke CSV lewat custom **dialog UI ekspor**  
-✅ Auto-resize kolom tabel biar mentok kanan  
-✅ Menampilkan nama dan NIM pembuat
+- ✅ Input data buku (judul, pengarang, tahun)
+- ✅ Tabel dinamis QTableWidget dengan scroll area aktif
+- ✅ Real-time search berdasarkan judul
+- ✅ Edit data via double click
+- ✅ Hapus data via menu atau tombol
+- ✅ Ekspor data ke CSV via custom dialog ekspor
+- ✅ Auto-resize kolom tabel
+- ✅ Clipboard integration: tombol "Paste Judul dari Clipboard"
+- ✅ Dockable search panel (bisa geser/detach)
+- ✅ Status bar berisi nama dan NIM
+- ✅ Form input dibungkus QScrollArea agar tetap bisa diakses saat window kecil
 
 ---
 
@@ -49,6 +51,31 @@ Sudah dikompilasi jadi:
 ├── buku.db                # Database SQLite (otomatis dibuat)
 └── README.md              
 ```
+
+---
+## 📋 Penambahan Fitur Week 11–13
+
+**🔖 QClipboard**
+
+Tombol baru: Paste Judul dari Clipboard
+
+Bisa paste dari aplikasi luar (Notepad, Word, dll)
+
+**🧩 QDockWidget**
+
+Komponen pencarian sekarang berada di panel yang bisa dipindah dan dilepas
+
+Lebih fleksibel dalam layout tampilan
+
+**📢 QStatusBar**
+
+Nama dan NIM pembuat ditampilkan di bagian bawah aplikasi secara permanen
+
+**🖱 QScrollArea**
+
+Form input dibungkus QScrollArea agar tidak overflow saat tampilan kecil
+
+Tabel juga mendukung scroll vertikal & horizontal secara otomatis
 
 ---
 
@@ -94,6 +121,9 @@ python main.py
 ![Screenshot (867)](https://github.com/user-attachments/assets/c524ec91-1277-49b3-8ae8-89c86bb2bb9b)
 ![Screenshot (868)](https://github.com/user-attachments/assets/4e671cc3-8c9c-4426-b716-57491af95a59)
 ![Screenshot (869)](https://github.com/user-attachments/assets/a3ee79d1-9440-4338-b497-82e7a20d597e)
+![Screenshot (879)](https://github.com/user-attachments/assets/23812810-6d20-4269-b6a0-f7ad717ec251)
+![Screenshot (880)](https://github.com/user-attachments/assets/fbd65212-6fec-49d0-aa11-68270ea1e64e)
+![Screenshot (881)](https://github.com/user-attachments/assets/968b8882-878d-47a4-9398-ecbd1348cd1b)
 
 
 6. Tampilan csv
