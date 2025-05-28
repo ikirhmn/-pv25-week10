@@ -27,6 +27,12 @@ class MainApp(QtWidgets.QMainWindow):
         super().__init__()
         self.ui = Ui_ManajemenBuku()
         self.ui.setupUi(self)
+
+        scroll = QtWidgets.QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setWidget(self.ui.centralwidget)
+        self.setCentralWidget(scroll)
+
         self.db_conn = sqlite3.connect("buku.db")
         self.cursor = self.db_conn.cursor()
         self.selected_id = None
@@ -34,6 +40,8 @@ class MainApp(QtWidgets.QMainWindow):
         self.init_db()
         self.setup_ui_logic()
         self.load_data()
+        self.create_search_dock() 
+        self.statusBar().showMessage("Rizki Rahman Maulana - F1D022093")
 
     def init_db(self):
         self.cursor.execute("""
@@ -63,6 +71,31 @@ class MainApp(QtWidgets.QMainWindow):
 
         header = self.ui.tableWidget.horizontalHeader()
         header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+        # Untuk clipboard paste button (pastikan tombol ada)
+        if hasattr(self.ui, 'pushButton_paste'):
+            self.ui.pushButton_paste.clicked.connect(self.paste_clipboard_to_judul)
+
+    def create_search_dock(self):
+        # Hindari dobel dock
+        if hasattr(self, 'search_dock'):
+            self.removeDockWidget(self.search_dock)
+
+        self.search_dock = QtWidgets.QDockWidget("Cari Buku", self)
+        self.search_dock.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
+
+        search_widget = QtWidgets.QWidget()
+        search_layout = QtWidgets.QVBoxLayout()
+        search_label = QtWidgets.QLabel("Cari Judul:")
+        self.search_input = QtWidgets.QLineEdit()
+        self.search_input.textChanged.connect(self.search_data)
+
+        search_layout.addWidget(search_label)
+        search_layout.addWidget(self.search_input)
+        search_widget.setLayout(search_layout)
+
+        self.search_dock.setWidget(search_widget)
+        self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.search_dock)
 
     def load_data(self, filter_text=""):
         self.ui.tableWidget.setRowCount(0)
